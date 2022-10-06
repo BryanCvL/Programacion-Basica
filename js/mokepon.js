@@ -22,6 +22,9 @@ const spanAtaqueEnemigo = document.getElementById('ataque-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedor-ataques')
 
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
+
 let ataqueJugador = []
 let ataqueEnemigo = []
 let vidasJugador = 0
@@ -42,6 +45,7 @@ let inputVolvasour = document.getElementById('Volvasour')
 let inputLucario = document.getElementById('Lucario')
 let inputMewtwo = document.getElementById('Mewtwo')
 let mascotaJugador
+let lienzo = mapa.getContext('2d')
 
 let mokepones = []
 
@@ -103,6 +107,8 @@ Mewtwo.ataque.push(
 mokepones.push(Charizard,Blastoise,Volvasour,Lucario,Mewtwo)
 
 function iniciarJuego() {
+    sectionVerMapa.style.display = 'none'
+
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre} />
@@ -199,7 +205,17 @@ function selecionarMascotaJugador(){
 
     seleccionarMascotaEnemigo()    
     sectionSeleccionarMascota.style.display = 'none'
-    sectionSeleccionarAtaque.style.display = 'flex'
+    // sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'flex'
+    let imagenDeVolvasour = new Image()
+    imagenDeVolvasour.src = Volvasour.foto
+    lienzo.drawImage(
+        imagenDeVolvasour,
+        20,
+        40,
+        100,
+        100
+    )
 }
 
 function extraerAtaques(mascotaJugador) {
