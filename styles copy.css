@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Bungee&family=Fredoka+One&family=Grandstander:wght@300&display=swap');
+
+body  {
+    /*font-family: 'Bebas Neue', cursive;*/
+    /*font-family: 'Bungee', cursive;*/
+    font-family: 'Grandstander', cursive;
+    background: #171717;
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo {
+    color:#DA0037;
+    font-size: 60px;
+    height: 60px;
+}
+
+.subtitulo {
+    color: white;
+    font-size: 40px;
+    height: 60px;
+}
+
+.tarjetas {
+    display: flex;
+    gap:20px;
+    padding: 10px;
+}
+
+.tarjeta-de-mokepon {
+    width: 200px;
+    height: 184px;
+    background: #444444;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.tarjeta-de-mokepon p {
+    font-size: 25px;
+    color: #EDEDED;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-family: 'Grandstander', cursive;
+}
+
+.tarjeta-de-mokepon img {
+    width: 164px;
+    height: 150px;
+}
+
+.boton {
+    padding: 5px;
+}
+
+.botonMascota {
+    display: flex;
+    color: #DA0037;
+    font-family: 'Fredoka One', cursive;
+    font-size: 25px;
+    height: 50px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+input {
+    display: none;
+}
+
+.titulo {
+    color:#DA0037;
+    font-size: 60px;
+    height: 60px;
+}
+
+#seleccionar-ataque {
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-de-ataque {
+    background-color: #444444;
+    color: white;
+    border-color: transparent;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    font-family: 'Grandstander', cursive;
+    height: 60px;
+    width: 120px;
+    font-size: 20px;
+}
+
+.tarjetas-ataque {
+    display: flex;
+    gap: 10px;
+}
+
+#mensajes {
+    color: white;
+}
+
+.texto {
+    display: grid;
+    color: white;
+}
