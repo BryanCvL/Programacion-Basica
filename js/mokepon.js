@@ -47,6 +47,9 @@ let inputMewtwo = document.getElementById('Mewtwo')
 let mascotaJugador
 let lienzo = mapa.getContext('2d')
 let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = './assets/mokemap.png'
+let objetoMascotaJugador
 
 let mokepones = []
 
@@ -311,38 +314,45 @@ function reiniciarJuego() {
     location.reload()
 }
 
-function pintarPersonaje() {
-    Volvasour.x = Volvasour.x + Volvasour.velocidadX
-    Volvasour.y = Volvasour.y + Volvasour.velocidadY
+function pintarCanvas() {
+    objetoMascotaJugador.x = objetoMascotaJugador.x + objetoMascotaJugador.velocidadX
+    objetoMascotaJugador.y = objetoMascotaJugador.y + objetoMascotaJugador.velocidadY
     lienzo.clearRect(0,0,mapa.width,mapa.height)
     lienzo.drawImage(
-        Volvasour.mapaFoto,
-        Volvasour.x,
-        Volvasour.y,
-        Volvasour.ancho,
-        Volvasour.alto
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    lienzo.drawImage(
+        objetoMascotaJugador.mapaFoto,
+        objetoMascotaJugador.x,
+        objetoMascotaJugador.y,
+        objetoMascotaJugador.ancho,
+        objetoMascotaJugador.alto
     )
 }
 
 function detenerMovimiento() {
-    Volvasour.velocidadX = 0
-    Volvasour.velocidadY = 0
+    objetoMascotaJugador.velocidadX = 0
+    objetoMascotaJugador.velocidadY = 0
 }
 
 function moverArriba() {
-    Volvasour.velocidadY = - 5
+    objetoMascotaJugador.velocidadY = - 5
 }
 
 function moverAbajo() {
-    Volvasour.velocidadY = 5
+    objetoMascotaJugador.velocidadY = 5
 }
 
 function moverIzquierda() {
-    Volvasour.velocidadX = - 5
+    objetoMascotaJugador.velocidadX = - 5
 }
 
 function moverDerecha() {
-    Volvasour.velocidadX = 5
+    objetoMascotaJugador.velocidadX = 5
 }
 
 function sePresionounaTecla(event) {
@@ -369,11 +379,22 @@ function seSoltounaTecla() {
 }
 
 function iniciarMapa() {
-    intervalo = setInterval(pintarPersonaje,50)
+    mapa.width = 800
+    mapa.height = 600
+    objetoMascotaJugador = obtenerObjetoMascota()
+    intervalo = setInterval(pintarCanvas,50)
 
     window.addEventListener('keydown',sePresionounaTecla)
 
     window.addEventListener('keyup',seSoltounaTecla)
+}
+
+function obtenerObjetoMascota() {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador == mokepones[i].nombre) {
+            return mokepones[i]
+        }
+    }
 }
 
 window.addEventListener('load',iniciarJuego)
