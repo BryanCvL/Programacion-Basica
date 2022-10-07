@@ -46,6 +46,7 @@ let inputLucario = document.getElementById('Lucario')
 let inputMewtwo = document.getElementById('Mewtwo')
 let mascotaJugador
 let lienzo = mapa.getContext('2d')
+let intervalo
 
 let mokepones = []
 
@@ -61,6 +62,8 @@ class Mokepon {
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -213,7 +216,7 @@ function selecionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'
     // sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'flex'
-
+    intervalo = setInterval(pintarPersonaje,50)
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -309,6 +312,8 @@ function reiniciarJuego() {
 }
 
 function pintarPersonaje() {
+    Volvasour.x = Volvasour.x + Volvasour.velocidadX
+    Volvasour.y = Volvasour.y + Volvasour.velocidadY
     lienzo.clearRect(0,0,mapa.width,mapa.height)
     lienzo.drawImage(
         Volvasour.mapaFoto,
@@ -319,9 +324,25 @@ function pintarPersonaje() {
     )
 }
 
-function moverVolvasour() {
-    Volvasour.x = Volvasour.x + 5
-    pintarPersonaje()
+function detenerMovimiento() {
+    Volvasour.velocidadX = 0
+    Volvasour.velocidadY = 0
+}
+
+function moverArriba() {
+    Volvasour.velocidadY = - 5
+}
+
+function moverAbajo() {
+    Volvasour.velocidadY = 5
+}
+
+function moverIzquierda() {
+    Volvasour.velocidadX = - 5
+}
+
+function moverDerecha() {
+    Volvasour.velocidadX = 5
 }
 
 window.addEventListener('load',iniciarJuego)
