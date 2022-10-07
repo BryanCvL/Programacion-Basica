@@ -216,7 +216,7 @@ function selecionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'
     // sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'flex'
-    intervalo = setInterval(pintarPersonaje,50)
+    iniciarMapa()
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -343,6 +343,37 @@ function moverIzquierda() {
 
 function moverDerecha() {
     Volvasour.velocidadX = 5
+}
+
+function sePresionounaTecla(event) {
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break;
+        case 'ArrowDown':
+            moverAbajo()
+            break;
+        case 'ArrowLeft':
+            moverIzquierda()
+            break;
+        case 'ArrowRight':
+            moverDerecha()
+            break;
+        default:
+            break;
+    }
+}
+
+function seSoltounaTecla() {
+    detenerMovimiento()
+}
+
+function iniciarMapa() {
+    intervalo = setInterval(pintarPersonaje,50)
+
+    window.addEventListener('keydown',sePresionounaTecla)
+
+    window.addEventListener('keyup',seSoltounaTecla)
 }
 
 window.addEventListener('load',iniciarJuego)
