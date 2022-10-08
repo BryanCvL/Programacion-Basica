@@ -54,27 +54,43 @@ let objetoMascotaJugador
 let mokepones = []
 
 class Mokepon {
-    constructor(nombre, foto, vida) {
+    constructor(nombre, foto, vida, mapaFoto , x=10, y=10 ) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataque = []
-        this.x = 20
-        this.y = 30
+        this.x = x
+        this.y = y
         this.ancho = 80
         this.alto = 80
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = mapaFoto
         this.velocidadX = 0
         this.velocidadY = 0
     }
+
+    pintarMokepon() {
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
+    }
 }
 
-let Charizard = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5)
-let Blastoise = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5)
-let Volvasour = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5)
-let Lucario = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5)
-let Mewtwo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5)
+let Charizard = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg')
+let Blastoise = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png')
+let Volvasour = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png')
+let Lucario = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png')
+let Mewtwo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png')
+
+let CharizardEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg',200,400)
+let BlastoiseEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png',300,450)
+let VolvasourEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png',600,450)
+let LucarioEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png',700,300)
+let MewtwoEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png',700,350)
 
 Charizard.ataque.push(
     {nombre: '🔥', id:'boton-fuego'},
@@ -325,13 +341,12 @@ function pintarCanvas() {
         mapa.width,
         mapa.height
     )
-    lienzo.drawImage(
-        objetoMascotaJugador.mapaFoto,
-        objetoMascotaJugador.x,
-        objetoMascotaJugador.y,
-        objetoMascotaJugador.ancho,
-        objetoMascotaJugador.alto
-    )
+    objetoMascotaJugador.pintarMokepon()
+    CharizardEnemigo.pintarMokepon()
+    BlastoiseEnemigo.pintarMokepon()
+    VolvasourEnemigo.pintarMokepon()
+    LucarioEnemigo.pintarMokepon()
+    MewtwoEnemigo.pintarMokepon()
 }
 
 function detenerMovimiento() {
