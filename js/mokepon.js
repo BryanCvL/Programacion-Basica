@@ -347,6 +347,14 @@ function pintarCanvas() {
     VolvasourEnemigo.pintarMokepon()
     LucarioEnemigo.pintarMokepon()
     MewtwoEnemigo.pintarMokepon()
+
+    if (objetoMascotaJugador.velocidadX !== 0 || objetoMascotaJugador.velocidadY !== 0 ) {
+        revisarColision(VolvasourEnemigo)
+        revisarColision(CharizardEnemigo)
+        revisarColision(BlastoiseEnemigo)
+        revisarColision(LucarioEnemigo)
+        revisarColision(MewtwoEnemigo)
+    }
 }
 
 function detenerMovimiento() {
@@ -410,6 +418,27 @@ function obtenerObjetoMascota() {
             return mokepones[i]
         }
     }
+}
+
+function revisarColision(enemigo) {
+    const arribaMascota = objetoMascotaJugador.y
+    const abajoMascota = objetoMascotaJugador.y + objetoMascotaJugador.alto
+    const derechaMascota = objetoMascotaJugador.x + objetoMascotaJugador.ancho
+    const izquierdaMascota = objetoMascotaJugador.x
+
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquerdaEnemigo = enemigo.x
+
+    if (abajoMascota < arribaEnemigo || 
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquerdaEnemigo ||
+        izquierdaMascota > derechaEnemigo) {
+        return
+    }
+    detenerMovimiento()
+    alert("Hay colision con " + enemigo.nombre)
 }
 
 window.addEventListener('load',iniciarJuego)
