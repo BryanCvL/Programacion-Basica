@@ -50,19 +50,31 @@ let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = './assets/mokemap.png'
 let objetoMascotaJugador
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximodelMapa = 800
+
+if (anchoDelMapa > anchoMaximodelMapa ) {
+    anchoDelMapa = anchoMaximodelMapa - 20
+}
+
+alturaQueBuscamos = anchoDelMapa * 600 / 800
+
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
 
 let mokepones = []
 
 class Mokepon {
-    constructor(nombre, foto, vida, mapaFoto , x=10, y=10 ) {
+    constructor(nombre, foto, vida, mapaFoto) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataque = []
-        this.x = x
-        this.y = y
-        this.ancho = 80
-        this.alto = 80
+        this.ancho = 40
+        this.alto = 40
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = mapaFoto
         this.velocidadX = 0
@@ -86,11 +98,11 @@ let Volvasour = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./
 let Lucario = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png')
 let Mewtwo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png')
 
-let CharizardEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg',200,200)
-let BlastoiseEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png',300,100)
-let VolvasourEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png',100,400)
-let LucarioEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png',500,250)
-let MewtwoEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png',400,350)
+let CharizardEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg')
+let BlastoiseEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png')
+let VolvasourEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png')
+let LucarioEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png')
+let MewtwoEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png')
 
 Charizard.ataque.push(
     {nombre: '🔥', id:'boton-fuego'},
@@ -443,8 +455,8 @@ function seSoltounaTecla() {
 }
 
 function iniciarMapa() {
-    mapa.width = 800
-    mapa.height = 600
+    // mapa.width = 800
+    // mapa.height = 600
     objetoMascotaJugador = obtenerObjetoMascota()
     intervalo = setInterval(pintarCanvas,50)
 
