@@ -86,13 +86,21 @@ let Volvasour = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./
 let Lucario = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png')
 let Mewtwo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png')
 
-let CharizardEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg',200,400)
-let BlastoiseEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png',300,450)
-let VolvasourEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png',600,450)
-let LucarioEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png',700,300)
-let MewtwoEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png',700,350)
+let CharizardEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg',200,200)
+let BlastoiseEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png',300,100)
+let VolvasourEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png',100,400)
+let LucarioEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png',500,250)
+let MewtwoEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png',400,350)
 
 Charizard.ataque.push(
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '💧', id:'boton-agua'},
+    {nombre: '🌱', id:'boton-tierra'}
+)
+
+CharizardEnemigo.ataque.push(
     {nombre: '🔥', id:'boton-fuego'},
     {nombre: '🔥', id:'boton-fuego'},
     {nombre: '🔥', id:'boton-fuego'},
@@ -108,7 +116,23 @@ Blastoise.ataque.push(
     {nombre: '🌱', id:'boton-tierra'}
 )
 
+BlastoiseEnemigo.ataque.push(
+    {nombre: '💧', id:'boton-agua'},
+    {nombre: '💧', id:'boton-agua'},
+    {nombre: '💧', id:'boton-agua'},
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '🌱', id:'boton-tierra'}
+)
+
 Volvasour.ataque.push(
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '💧', id:'boton-agua'}
+)
+
+VolvasourEnemigo.ataque.push(
     {nombre: '🌱', id:'boton-tierra'},
     {nombre: '🌱', id:'boton-tierra'},
     {nombre: '🌱', id:'boton-tierra'},
@@ -124,7 +148,23 @@ Lucario.ataque.push(
     {nombre: '💧', id:'boton-agua'}
 )
 
+LucarioEnemigo.ataque.push(
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '💧', id:'boton-agua'}
+)
+
 Mewtwo.ataque.push(
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🌱', id:'boton-tierra'},
+    {nombre: '🔥', id:'boton-fuego'},
+    {nombre: '💧', id:'boton-agua'}
+)
+
+MewtwoEnemigo.ataque.push(
     {nombre: '🌱', id:'boton-tierra'},
     {nombre: '🌱', id:'boton-tierra'},
     {nombre: '🌱', id:'boton-tierra'},
@@ -161,10 +201,12 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max-min+1) + min)
 }
 
-function seleccionarMascotaEnemigo() {
-    let inputMascotaEnemigo = aleatorio(0,mokepones.length - 1)
-    spanMascotaEnemigo.innerHTML = mokepones[inputMascotaEnemigo].nombre
-    ataqueMokeponEnemigo = mokepones[inputMascotaEnemigo].ataque
+function seleccionarMascotaEnemigo(enemigo) {
+    // let inputMascotaEnemigo = aleatorio(0,mokepones.length - 1)
+    // spanMascotaEnemigo.innerHTML = mokepones[inputMascotaEnemigo].nombre
+    // ataqueMokeponEnemigo = mokepones[inputMascotaEnemigo].ataque
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataqueMokeponEnemigo = enemigo.ataque
     sequenciaAtaque()
 }
 
@@ -231,9 +273,8 @@ function selecionarMascotaJugador(){
 
     extraerAtaques(mascotaJugador)
 
-    seleccionarMascotaEnemigo()    
     sectionSeleccionarMascota.style.display = 'none'
-    // sectionSeleccionarAtaque.style.display = 'flex'
+    
     sectionVerMapa.style.display = 'flex'
     iniciarMapa()
 }
@@ -437,8 +478,11 @@ function revisarColision(enemigo) {
         izquierdaMascota > derechaEnemigo) {
         return
     }
+    clearInterval(intervalo)
     detenerMovimiento()
-    alert("Hay colision con " + enemigo.nombre)
+    sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'none'
+    seleccionarMascotaEnemigo(enemigo)
 }
 
 window.addEventListener('load',iniciarJuego)
