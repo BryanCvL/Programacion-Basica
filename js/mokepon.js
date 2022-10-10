@@ -71,8 +71,8 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataque = []
-        this.ancho = 40
-        this.alto = 40
+        this.ancho = 60
+        this.alto = 60
         this.x = aleatorio(0, mapa.width - this.ancho)
         this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
