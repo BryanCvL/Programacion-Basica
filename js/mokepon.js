@@ -208,7 +208,23 @@ function iniciarJuego() {
 
     botonMascotaJugador.addEventListener("click",selecionarMascotaJugador)
     botonReiniciar.addEventListener('click',reiniciarJuego)
+
+    unirseAlJuego()
 }
+
+function unirseAlJuego(){
+    fetch("http://localhost:8080/unirse")
+        .then(function (res){
+            // console.log(res)
+            if (res.ok) {
+                res.text()
+                    .then(function(respuesta){
+                        console.log(respuesta)
+                    })
+            }
+        })
+}
+
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max-min+1) + min)
 }
