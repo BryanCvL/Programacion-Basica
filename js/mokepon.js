@@ -433,6 +433,8 @@ function pintarCanvas() {
     LucarioEnemigo.pintarMokepon()
     MewtwoEnemigo.pintarMokepon()
 
+    enviarPosicion(objetoMascotaJugador.x, objetoMascotaJugador.y)
+
     if (objetoMascotaJugador.velocidadX !== 0 || objetoMascotaJugador.velocidadY !== 0 ) {
         revisarColision(VolvasourEnemigo)
         revisarColision(CharizardEnemigo)
@@ -440,6 +442,19 @@ function pintarCanvas() {
         revisarColision(LucarioEnemigo)
         revisarColision(MewtwoEnemigo)
     }
+}
+
+function enviarPosicion(x,y) {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x: x,
+            y: y
+        })
+    })
 }
 
 function detenerMovimiento() {
