@@ -26,6 +26,7 @@ const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 
 let jugadorId = null
+let enemigoId = null
 let ataqueJugador = []
 let ataqueEnemigo = []
 let vidasJugador = 0
@@ -327,9 +328,41 @@ function sequenciaAtaque() {
             }
             boton.disabled = true
             // console.log(ataqueJugador)
-            ataqueAleatorioEnemigo()
+            // ataqueAleatorioEnemigo()
+            if (ataqueJugador.length === 5) {
+                enviarAtaques()
+            }
         })
     })
+}
+
+function enviarAtaques() {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ataques: ataqueJugador
+        })
+    })
+
+    intervalo = setInterval(obtenerAtaques, 50)
+}
+
+function obtenerAtaques() {
+    fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`)
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ataques}) {
+                        if (ataques.length === 5) {
+                            ataqueEnemigo = ataques
+                            combate()
+                        }
+                    }) 
+            }
+        })
 }
 
 function indexAmbosOponente(jugador, enemigo) {
@@ -338,6 +371,7 @@ function indexAmbosOponente(jugador, enemigo) {
 }
 
 function combate() {
+    clearInterval(intervalo)
     for (let a = 0; a < ataqueJugador.length; a++) {
         if (ataqueJugador[a] == ataqueEnemigo[a]) {
             decisionCombate = 'EMPATE 🤜🏼🤛🏼'
@@ -392,7 +426,10 @@ function pintarCanvas() {
     )
     objetoMascotaJugador.pintarMokepon()
     mokeponesEnemigos.forEach(function (mokepon) {
+        // if (mokepon != undefined) {
         mokepon.pintarMokepon()
+        revisarColision(mokepon)
+        // }
     })
     // CharizardEnemigo.pintarMokepon()
     // BlastoiseEnemigo.pintarMokepon()
@@ -402,13 +439,7 @@ function pintarCanvas() {
 
     enviarPosicion(objetoMascotaJugador.x, objetoMascotaJugador.y)
 
-    if (objetoMascotaJugador.velocidadX !== 0 || objetoMascotaJugador.velocidadY !== 0 ) {
-        revisarColision(VolvasourEnemigo)
-        revisarColision(CharizardEnemigo)
-        revisarColision(BlastoiseEnemigo)
-        revisarColision(LucarioEnemigo)
-        revisarColision(MewtwoEnemigo)
-    }
+    
 }
 
 function enviarPosicion(x,y) {
@@ -428,17 +459,19 @@ function enviarPosicion(x,y) {
                         console.log(enemigos)
                         mokeponesEnemigos = enemigos.map(function (enemigo) {
                             let mokeponEnemigo = null
+                            // if (enemigo.mokepon != undefined) {
                             const mokeponNombre = enemigo.mokepon.nombre || ""
                             if (mokeponNombre === "Charizard") {
-                                mokeponEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg')        
+                                mokeponEnemigo = new Mokepon('Charizard','./assets/252-2525219_charizard-pokken-png-transparent-png.png',5,'./assets/images.jpg', enemigo.id)
                             } else if (mokeponNombre === "Blastoise") {
-                                mokeponEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png')  
+                                mokeponEnemigo = new Mokepon('Blastoise','./assets/400px-Pokken_Blastoise.png',5,'./assets/Blastoise.png', enemigo.id)
                             } else if (mokeponNombre === "Volvasour") {
-                                mokeponEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png')
+                                mokeponEnemigo = new Mokepon('Volvasour','./assets/1200px-Ivysaur_SSBU.png',5,'./assets/png-transparent-bulbasaur-venusaur-pokemon-smiley-yellow-others.png', enemigo.id)
                             } else if (mokeponNombre === "Lucario") {
-                                mokeponEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png')
+                                mokeponEnemigo = new Mokepon('Lucario','./assets/1200px-Lucario_SSBU.png',5,'./assets/d5t40gf-911b242f-5990-4043-92ea-356a77c7c358.png', enemigo.id)
                             } else {
-                                mokeponEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png')
+                                mokeponEnemigo = new Mokepon('Mewtwo','./assets/250px-Mewtwo_SSBU.png',5,'./assets/87461698-0fcb1d00-c60f-11ea-89a5-592a59fc6e26.png', enemigo.id)
+                                // }
                             }
                             mokeponEnemigo.x = enemigo.x
                             mokeponEnemigo.y = enemigo.y
@@ -531,6 +564,7 @@ function revisarColision(enemigo) {
     }
     clearInterval(intervalo)
     detenerMovimiento()
+    enemigoId = enemigo.nombre
     sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'none'
     seleccionarMascotaEnemigo(enemigo)
