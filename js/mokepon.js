@@ -264,7 +264,10 @@ function selecionarMascotaJugador(){
         spanMascotaJugador.innerHTML = inputMewtwo.id
         mascotaJugador = inputMewtwo.id
     }
-    else {alert('Debes seleccionar una mascota')}
+    else {
+        alert('Debes seleccionar una mascota')
+        return
+    }
 
     seleccionarMokepon(mascotaJugador)
 
