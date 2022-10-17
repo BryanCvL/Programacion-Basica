@@ -70,6 +70,7 @@ let mokeponesEnemigos = []
 
 class Mokepon {
     constructor(nombre, foto, vida, mapaFoto, id=null) {
+        this.id = id
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
@@ -567,7 +568,7 @@ function revisarColision(enemigo) {
     }
     clearInterval(intervalo)
     detenerMovimiento()
-    enemigoId = enemigo.nombre
+    enemigoId = enemigo.id
     sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'none'
     seleccionarMascotaEnemigo(enemigo)
