@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Bungee&family=Fredoka+One&family=Grandstander:wght@300&display=swap');
+
+body  {
+    /*font-family: 'Bebas Neue', cursive;*/
+    /*font-family: 'Bungee', cursive;*/
+    font-family: 'Grandstander', cursive;
+    background: #171717;
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo {
+    color:#DA0037;
+    font-size: 60px;
+    height: 60px;
+}
+
+.subtitulo {
+    color: white;
+    font-size: 40px;
+    height: 60px;
+}
+
+.tarjetas, .tarjetas-ataque {
+    display: flex;
+    gap:20px;
+    padding: 10px;
+}
+
+input:checked + label {
+    background-color: #CE1212;
+}
+
+.tarjeta-de-mokepon {
+    width: 200px;
+    height: 184px;
+    background: #444444;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.tarjeta-de-mokepon p {
+    font-size: 25px;
+    color: #EDEDED;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-family: 'Grandstander', cursive;
+}
+
+.tarjeta-de-mokepon img {
+    width: 164px;
+    height: 150px;
+}
+
+.boton {
+    padding: 5px;
+}
+
+.botonMascota {
+    display: flex;
+    color: #DA0037;
+    font-family: 'Fredoka One', cursive;
+    font-size: 25px;
+    height: 50px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+input {
+    display: none;
+}
+
+.titulo {
+    color:#DA0037;
+    font-size: 60px;
+    /* height: 60px; */
+}
+
+#seleccionar-ataque {
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-de-ataque {
+    background-color: #444444;
+    color: white;
+    border-color: transparent;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    font-family: 'Grandstander', cursive;
+    height: 60px;
+    width: 65px;
+    font-size: 20px;
+}
+
+#mensajes {
+    display: flex;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #EEEBDD;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.texto {
+    display: grid;
+    color: white;
+}
+
+#boton-reiniciar {
+    padding: 5px;
+    border: transparent;
+    background-color: #F0A500;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#resultado {
+    align-items: center;
+}
+
+.bloques {
+    color: white;
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: 250px 250px 250px;
+    justify-items: center;
+}
+
+#mascota-jugador {
+    color: #239D60;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#mascota-enemigo {
+    color: #BE3144;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#ataque-jugador, #ataque-enemigo {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 0px;
+}
+
+#vidas-jugador, #vidas-enemigo {
+    display: flex;
+    justify-content: center;
+    color: #F0A500;
+    font-size: 35px;
+    font-family: Bungee;
+    margin: 0px;
+}
+
+.hide1 {
+    display: flex;
+    justify-content: center;
+    color: #F0A500;
+    font-size: 35px;
+    font-family: Bungee;
+    margin: 0px;
+    width: 228px;
+    align-items: center;
+}
+
+.hide2 {
+    display: flex;
+    justify-content: center;
+    color: #F0A500;
+    font-size: 25px;
+    font-family: Bungee;
+    align-items: center;
+    height: 25px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+#registro-resultado {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 0px;
+}
+
+.lineas {
+    height: 16px;
+}
+
+.botonFlechas {
+    justify-content: center;
+}
+
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#ver-mapa button {
+    color: #DA0037;
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    height: 50px;
+    border-radius: 20px;
+    margin: 5px;
+    width: 150px;
+}
+
+@media (max-width: 560px) {
+    .tarjetas, .tarjetas-ataque {
+        flex-direction: column;
+    }
+    .bloques {
+        grid-template-columns: 125px 125px 125px;
+    }
+}
+
+@media (max-width: 450px) {
+    #ver-mapa div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}
